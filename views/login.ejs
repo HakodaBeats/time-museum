@@ -14,14 +14,14 @@
 					<p class="mt-5">Effettua il login per continuare, oppure <br>registrati se non hai un account.</p>
 				</div>
 
-				<form class="mt-10">
+				<form class="mt-10" method="post" name="login" action="/login">
 					<input type="text" name="username" id="username" placeholder="Username"
 						class="block w-full rounded-lg border-0 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
 
 					<input type="password" name="password" id="password" placeholder="Password"
 						class="mt-4 block w-full rounded-lg border-0 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
 
-					<button type="button" id="loginBtn" class="bg-black hover:bg-gray-900 transition-300 text-white font-semibold py-2 px-4 rounded-lg mt-10 w-full">Login</button>
+					<button type="submit" id="loginBtn" class="bg-black hover:bg-gray-900 transition-300 text-white font-semibold py-2 px-4 rounded-lg mt-10 w-full">Login</button>
 
 					<div class="mt-10">
 						<p class="text-center">Non hai ancora un account? <a href="./signup.html" class="text-blue-500">Registrati</a>

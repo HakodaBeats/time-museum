@@ -20,20 +20,11 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
 // Database handling
-const mariadb = require('mariadb')
-
-const pool = mariadb.createPool({
-	host: 'localhost',
-	user: `${process.env.DATABASE_USER}`,
-	password: `${process.env.DATABASE_PASSWORD}`,
-	connectionLimit: 5
-})
-
-let connection
+const db = require('./modules/database')
 
 async function dbAsyncConnection() {
 	try {
-		connection = await pool.getConnection()
+		connection = await db.pool.getConnection()
 		await connection.query("USE TimeModel")
 		console.log('Connessione avvenuta')
 
@@ -48,7 +39,7 @@ async function dbAsyncConnection() {
 
 dbAsyncConnection()
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3500
 
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`)

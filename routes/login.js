@@ -5,4 +5,8 @@ router.get('/', (req, res) => {
     res.render('login')
 })
 
+router.post('/', (req, res) => {
+    // Continua da qui
+})
+
 module.exports = router
