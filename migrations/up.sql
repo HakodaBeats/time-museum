@@ -1,8 +1,14 @@
-CREATE DATABASE TimeModel;
-USE TimeModel;
+CREATE TABLE History (
+     ArticleID INT PRIMARY KEY,
+     Title VARCHAR(50) NOT NULL,
+     Subtitle VARCHAR(50) NOT NULL,
+     Description TEXT NOT NULL,
+     Content TEXT NOT NULL,
+     ACTIVE BOOL DEFAULT TRUE
+);
 
-CREATE TABLE users (
-     UserID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE Users (
+     UserID INT NOT NULL,
      Name VARCHAR(50) NOT NULL,
      Surname VARCHAR(50) NOT NULL,
      Email VARCHAR(50) NOT NULL,
@@ -12,8 +18,8 @@ CREATE TABLE users (
      PRIMARY KEY (UserID)
 );
 
-CREATE TABLE events (
-     EventID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE Events (
+     EventID INT NOT NULL,
      Title VARCHAR(50) NOT NULL,
      Subtitle VARCHAR(50) NOT NULL,
      Description TEXT NOT NULL,
@@ -25,18 +31,8 @@ CREATE TABLE events (
      PRIMARY KEY (EventID)
 );
 
-CREATE TABLE history (
-     ArticleID INT NOT NULL AUTO_INCREMENT,
-     Title VARCHAR(50) NOT NULL,
-     Subtitle VARCHAR(50) NOT NULL,
-     Description TEXT NOT NULL,
-     Content TEXT NOT NULL,
-     ACTIVE BOOL DEFAULT TRUE,
-     PRIMARY KEY (ArticleID)
-);
-
-CREATE TABLE credits (
-     StafferID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE Credits (
+     StafferID INT NOT NULL,
      Name VARCHAR(50) NOT NULL,
      Surname VARCHAR(50) NOT NULL,
      Role VARCHAR(50) NOT NULL,

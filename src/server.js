@@ -1,5 +1,6 @@
 const { PORT } = require('./modules/consts')
 const routes = require('./modules/routes')
+const database = require('./modules/database')
 
 const path = require('path')
 const express = require('express')
