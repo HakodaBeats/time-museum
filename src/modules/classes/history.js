@@ -7,9 +7,10 @@ class History {
     `
     const stmt = db.prepare(query)
 
-    const articlePromise = new Promise((resolve, _) => {
-      stmt.get(articleID, (_, article) => {
-        article ? resolve(article) : resolve(null)
+    const articlePromise = new Promise((resolve, reject) => {
+      stmt.get(articleID, (err, article) => {
+        if (err) throw err
+        article ? resolve(article) : reject("Article not found")
       })
     })
 
@@ -24,9 +25,10 @@ class History {
     `
     const stmt = db.prepare(query)
 
-    const articlesPromise = new Promise((resolve, _) => {
-      stmt.all((_, articles) => {
-        articles ? resolve(articles) : resolve(null)
+    const articlesPromise = new Promise((resolve, reject) => {
+      stmt.all((err, articles) => {
+        if(err) throw err
+        articles ? resolve(articles) : reject("Articles not found")
       })
     })
 
