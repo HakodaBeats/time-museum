@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose()
 
-let db = new sqlite3.Database('./database-time.db', err => {
+let db = new sqlite3.Database('database-time.db', err => {
   if (err) throw err
   console.log('Connessione avvenuta con successo')
 })
@@ -12,7 +12,7 @@ class History {
     const query = `
       INSERT INTO History
       (Title, Subtitle, Description, Content)
-      VALUES (?, ?, ?, ?)
+      VALUES (?, ?, ?, ?);
     `
     const stmt = db.prepare(query)
     stmt.run(title, subtitle, description, content)
@@ -23,9 +23,12 @@ class History {
     const query = `
       SELECT * FROM History WHERE ArticleID = ?;
     `
-    const stmt = db.prepare(query)
-    let article = stmt.run(articleID)
-    stmt.finalize()
+    let article
+
+    db.get(query, [articleID], (err, row) => {
+      if (err) return console.error(err.message) // TODO: Error handling
+      article = row
+    })
 
     return article
   }
@@ -34,12 +37,19 @@ class History {
     const query = `
       SELECT * FROM History;
     `
-    return db.run(query)
+    let articles
+
+    db.all(query, [], (err, rows) => {
+      if (err) return console.error(err.message) // TODO: Error handling
+      articles = rows
+    })
+
+    return articles
   }
 
   deleteArticle(articleID) {
     const query = `
-      DELETE * FROM History WHERE ArticleID = ?
+      DELETE FROM History WHERE ArticleID = ?;
     `
     const stmt = db.prepare(query)
     stmt.run(articleID)
@@ -68,12 +78,12 @@ console.log('Selezione primo articolo:\n')
 let firstArticle = history.getArticle(1)
 console.log(firstArticle)
 
-console.log('Selezione di tutti gli articoli')
+console.log('Selezione di tutti gli articoli\n')
 
 let articles = history.getAllArticles()
 console.log(articles)
 
-console.log('Cambiamento del primo articolo: ')
+console.log('Cambiamento del primo articolo:\n')
 
 history.changeArticle(1, {
    title: "Titolo dell'articolo modificato", 
@@ -82,16 +92,20 @@ history.changeArticle(1, {
    content: "Nuovo ontenuto dell'audace articolo"
 })
 
-console.log('Stampa di controllo dopo cambiamento articolo: ')
+console.log('Stampa di controllo dopo cambiamento articolo:\n')
 
 articles = history.getAllArticles()
 console.log(articles)
 
-console.log('Eliminazione primo articolo')
+console.log('Eliminazione primo articolo:\n')
 
 history.deleteArticle(1)
 
-console.log('Seconda di controllo dopo cambiamento articolo: ')
+console.log('Seconda stampa di controllo dopo cancellamento articolo:\n')
 
 articles = history.getAllArticles()
-console.log(articles)
+console.log()
+
+db.all('SELECT * FROM History', [], (err, rows) => {
+  console.log(rows)
+})

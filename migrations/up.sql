@@ -1,5 +1,5 @@
 CREATE TABLE History (
-     ArticleID INT PRIMARY KEY,
+     ArticleID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
      Title VARCHAR(50) NOT NULL,
      Subtitle VARCHAR(50) NOT NULL,
      Description TEXT NOT NULL,
