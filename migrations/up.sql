@@ -38,5 +38,3 @@ CREATE TABLE Credits (
 	Active BOOL DEFAULT TRUE,
 	PRIMARY KEY (StafferID)
 );
-
-

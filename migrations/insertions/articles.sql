@@ -46,10 +46,6 @@ L'innovazione, in quanto processo continuo, dato dalla consapevolezza dei rapidi
 Si progetta perciò il museo come spazio sperimentale aperto, un vero e proprio laboratorio delle idee, che non escluda utilizzi e possibilità che potranno emergere in  itinere, e soltanto in itinere, in dialogo con le attuali sfide educative."
 )
 
-
-
-
-
 INSERT INTO History (
 Title, Description, Content
 ) VALUES (
@@ -60,7 +56,6 @@ Title, Description, Content
 Il corpo centrale di PHILAE può essere fatto ruotare di 360 gradi. Fanno parte del corpo centrale, i pannelli solari, la strumentazione elettronica, un trapano verticale e la sonda APX. Il trapano può far scendere di 30 cm e porre in rotazione, una punta elicoidale in metallo, simulando la fase di trivellazione della superficie cometaria. La sonda APX scende anch’essa di 40 cm per avvicinarsi e fotografare la superficie. All’interno di PHILAE sono presenti alcuni sensori: un accelerometro, tre misuratori di temperatura, un magnetometro, un sensore di polveri. Sulle pareti laterali sono poste sette telecamere, di cui due per riprese stereoscopiche. L’energia per il funzionamento del lander è prelevata da una batteria interna e in parte dai pannelli solari. Il lander può comunque essere alimentato anche da un generatore a 12 V esterno e l’alimentazione è trasferita alle schede interne mediante contatti striscianti posti sopra un disco circolare. Philae è comandata a distanza con segnali Bluetooth, da una console hardware o da un PC.
 Il progetto nasce da una proposta del prof. Marco Calegari rivolta agli studenti del corso di elettronica. Il progetto è stato finanziato da due aziende, la C&D Elettronica di Bergamo e la MEI System di Valbrembo."
 )
-
 
 INSERT INTO History (
 Title, Description, Content

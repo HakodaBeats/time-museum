@@ -1,28 +1,9 @@
 const db = require('../db')
 
 class History {
-  constructor(title, description, content) {
-    this.title = title,
-    this.description = description,
-    this.content = content
-  }
-
-  static createArticle(article) {
-    const { title, description, content } = article 
-
+  static getRecord(articleID) {
     const query = `
-      INSERT INTO History
-      (Title, Description, Content)
-      VALUES (?, ?, ?);
-    `
-    const stmt = db.prepare(query)
-    stmt.run(title, description, content)
-    stmt.finalize()
-  }
-
-  static getArticle(articleID) {
-    const query = `
-      SELECT * FROM History WHERE ArticleID = ? & Active <> FALSE;
+      SELECT * FROM History WHERE ArticleID = ? AND Active <> FALSE;
     `
     const stmt = db.prepare(query)
 
@@ -37,7 +18,7 @@ class History {
     return articlePromise
   }
 
-  static async getAllArticles() {
+  static async getAllRecords() {
     const query = `
       SELECT * FROM History WHERE Active <> FALSE;
     `
@@ -54,7 +35,20 @@ class History {
     return articlesPromise
   }
 
-  static deleteArticle(articleID) {
+  static insert(article) {
+    const { title, description, content } = article 
+
+    const query = `
+      INSERT INTO History
+      (Title, Description, Content)
+      VALUES (?, ?, ?);
+    `
+    const stmt = db.prepare(query)
+    stmt.run(title, description, content)
+    stmt.finalize()
+  }
+
+  static delete(articleID) {
     const query = `
       UPDATE History 
       SET Active = FALSE 
@@ -65,7 +59,7 @@ class History {
     stmt.finalize()
   }
 
-  static changeArticle(articleID, newArticle) {
+  static update(articleID, newArticle) {
     const {title, description, content} = newArticle
 
     const query = `
@@ -75,6 +69,17 @@ class History {
     `
     const stmt = db.prepare(query)
     stmt.run(title, description, content, articleID)
+    stmt.finalize()
+  }
+
+  static recover(articleID) {
+    const query = `
+      UPDATE History
+      SET Active = TRUE
+      WHERE ArticleID = ?
+    `
+    const stmt = db.prepare(query)
+    stmt.run(articleID)
     stmt.finalize()
   }
 }
