@@ -10,7 +10,7 @@ class History {
     const articlePromise = new Promise((resolve, reject) => {
       stmt.get(articleID, (err, article) => {
         if (err) throw err
-        article ? resolve(article) : reject("Article not found")
+        article ? resolve(article) : reject(new Error("Error: article not found"))
       })
     })
 
@@ -19,7 +19,7 @@ class History {
     return articlePromise
   }
 
-  static async getAllRecords() {
+  static getAllRecords() {
     const query = `
       SELECT * FROM History WHERE Active <> FALSE;
     `
@@ -28,7 +28,10 @@ class History {
     const articlesPromise = new Promise((resolve, reject) => {
       stmt.all((err, articles) => {
         if(err) throw err
-        articles ? resolve(articles) : reject("Articles not found")
+        
+        articles 
+          ? resolve(articles) 
+          : reject(new Error("Error: article not found"))
       })
     })
 
@@ -87,5 +90,3 @@ class History {
 }
 
 module.exports.History = History
-
-
