@@ -3,14 +3,16 @@ const db = require('../db')
 class History {
   static getRecord(articleID) {
     const query = `
-      SELECT * FROM History WHERE ArticleID = ? AND Active <> FALSE;
+      SELECT * FROM History WHERE ArticleID = ? AND Active = TRUE;
     `
     const stmt = db.prepare(query)
 
     const articlePromise = new Promise((resolve, reject) => {
       stmt.get(articleID, (err, article) => {
         if (err) throw err
-        article ? resolve(article) : reject(new Error("Error: article not found"))
+        article 
+          ? resolve(article) 
+          : reject(new Error("Error: article not found"))
       })
     })
 
@@ -21,7 +23,7 @@ class History {
 
   static getAllRecords() {
     const query = `
-      SELECT * FROM History WHERE Active <> FALSE;
+      SELECT * FROM History;
     `
     const stmt = db.prepare(query)
 
@@ -70,7 +72,7 @@ class History {
     const query = `
       UPDATE History
       SET Title = ?, Description = ?, Content = ?
-      WHERE ArticleID = ?
+      WHERE ArticleID = ?;
     `
     const stmt = db.prepare(query)
     stmt.run(title, description, content, articleID)
@@ -81,7 +83,7 @@ class History {
     const query = `
       UPDATE History
       SET Active = TRUE
-      WHERE ArticleID = ?
+      WHERE ArticleID = ?;
     `
     const stmt = db.prepare(query)
     stmt.run(articleID)
